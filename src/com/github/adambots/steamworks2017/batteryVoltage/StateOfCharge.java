@@ -2,12 +2,16 @@ package com.github.adambots.steamworks2017.batteryVoltage;
 
 import org.usfirst.frc.team245.robot.Sensors;
 
+/*
+ * THIS SHOULD BE CALLED IN robotPeriodic()
+ * 
+ */
 public class StateOfCharge {
 	
 	//Constants for battery
-	private static final double nominalVoltage = 12;	//12V
-	private static final double nominalCapacity = 17;	// at 20 hour discharge, min17Ah, max18.2Ah
-	private static final double deltaTime = 20;			//CAN updates the value every 20ms
+	private static final double NOMINAL_VOLTAGE = 12;	//12V
+	private static final double NOMINAL_CAPACITY = 17;	// at 20 hour discharge, min17Ah, max18.2Ah
+	private static final double DELTA_TIME = 50;			//CAN updates the value every 20ms, but the periodic function iterates at 50hz
 	
 	private static double initialSOC;	//this will be retroactively changed based on the Kalman Filter
 	private static double currentSOC;	//this will be retroactively changed based on the amount initialSOC is changed
@@ -18,8 +22,8 @@ public class StateOfCharge {
 		initialSOC = initial;
 		previousSOC = initial;
 		dischargeCurrent = Sensors.getPowerDistro().getTotalCurrent();
-		
-		currentSOC = previousSOC + deltaTime*(dischargeCurrent/nominalCapacity);
+		//calculation for the first call after robot is enabled
+		currentSOC = previousSOC + DELTA_TIME*(dischargeCurrent/NOMINAL_CAPACITY);
 		
 	}
 	
