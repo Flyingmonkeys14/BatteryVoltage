@@ -10,7 +10,7 @@ public class StateOfCharge {
 	
 	//Constants for battery
 	private static final double NOMINAL_VOLTAGE = 12;	//12V
-	private static final double NOMINAL_CAPACITY = 17;	// at 20 hour discharge, min17Ah, max18.2Ah
+	private static final double NOMINAL_CAPACITY = 17.2;	// at 20 hour discharge, min17Ah, max18.2Ah
 	private static final double DELTA_TIME = 50;			//CAN updates the value every 20ms, but the periodic function iterates at 50hz
 	
 	private static double initialSOC;	//this will be retroactively changed based on the Kalman Filter
